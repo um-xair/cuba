@@ -1,1 +1,167 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>3D Cuboid Animation</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 900px;
+            visibility: hidden; /* Visible after initialization */
+        }
+
+        .hi {
+            position: relative;
+            z-index: 1;
+            font-size: 90px;
+            line-height: 1;
+            text-transform: uppercase;
+            text-align: center;
+            transform-style: preserve-3d;
+        }
+
+        .hi__cuboid {
+            position: relative;
+            width: 500px; /* Cuboid width */
+            height: 70px; /* Cuboid height */
+            transform-style: preserve-3d;
+            margin: 30px 0;
+            transform: rotateX(20deg) rotateY(15deg);
+        }
+
+        .face {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: black;
+            border: 1px solid #5E5D5E; /* Visible edges */
+        }
+
+        /* Ensure correct cube depth by matching half of the height (35px) */
+        .face--front { transform: translateZ(1px); background: black; color: white; }
+        .face--back { transform: translateZ(-70px) rotateX(180deg); background: black; color: white; }
+        .face--top { transform: rotateX(90deg) translateY(-35px) translateZ(35px); background: white; color: black; }
+        .face--bottom { transform: rotateX(-90deg) translateY(35px) translateZ(35px); background: white; color: black; }
+
+        .hi__word {
+            margin: 0;
+        }
+
+        /* Base and Location */
+        .hi__base {
+            position: absolute;
+            z-index: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 752px;
+            height: 250px;
+        }
+
+        .hi__base-plate {
+            width: 100%;
+            height: 100%;
+            background: black;
+            border: 1px solid #5E5D5E;
+        }
+
+        .hi__location {
+            position: absolute;
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .hi__location--lat {
+            top: 50%;
+            left: 0;
+            transform: rotate(-90deg) translateX(10px);
+        }
+
+        .hi__location--long {
+            top: 50%;
+            right: 0;
+            transform: rotate(90deg) translateX(-10px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="hi">
+            <div class="hi__cuboid">
+                <div class="face face--front"><p class="hi__word">R4XN</p></div>
+                <div class="face face--back"><p class="hi__word">R4XN</p></div>
+                <div class="face face--top"><p class="hi__word">R4XN</p></div>
+                <div class="face face--bottom"><p class="hi__word">R4XN</p></div>
+                <div class="face face--left"><p class="hi__word">R4XN</p></div>
+                <div class="face face--right"><p class="hi__word">R4XN</p></div>
+            </div>
+
+            <div class="hi__cuboid">
+                <div class="face face--front"><p class="hi__word">PROJECT</p></div>
+                <div class="face face--back"><p class="hi__word">PROJECT</p></div>
+                <div class="face face--top"><p class="hi__word">PROJECT</p></div>
+                <div class="face face--bottom"><p class="hi__word">PROJECT</p></div>
+                <div class="face face--left"><p class="hi__word">PROJECT</p></div>
+                <div class="face face--right"><p class="hi__word">PROJECT</p></div>
+            </div>
+
+            <div class="hi__cuboid">
+                <div class="face face--front"><p class="hi__word">SOLUTION</p></div>
+                <div class="face face--back"><p class="hi__word">SOLUTION</p></div>
+                <div class="face face--top"><p class="hi__word">SOLUTION</p></div>
+                <div class="face face--bottom"><p class="hi__word">SOLUTION</p></div>
+                <div class="face face--left"><p class="hi__word">SOLUTION</p></div>
+                <div class="face face--right"><p class="hi__word">SOLUTION</p></div>
+            </div>
+        </div>
+
+        <div class="hi__base">
+            <div class="hi__base-plate"></div>
+            <p class="hi__location hi__location--lat">53.3454° N</p>
+            <p class="hi__location hi__location--long">-6.3070° E</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.container').style.visibility = 'visible';
+            const cuboids = document.querySelectorAll('.hi__cuboid');
+
+            cuboids.forEach((cuboid, i) => {
+                const delay = i * 0.2;
+                gsap.to(cuboid, {
+                    rotationX: -360,
+                    duration: 8,
+                    repeat: -1,
+                    ease: 'none',
+                    delay
+                });
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</body>
+
+</html>
